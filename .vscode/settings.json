@@ -1,0 +1,12 @@
+{   
+  "eslint.validate": [
+  "javascript", "javascriptreact", "typescript", "typescriptreact"
+],
+  "editor.codeActionsOnSave": {
+
+    "source.fixAll.eslint": true
+  },
+  "importSorter.runOnSave": "always",
+  "importSorter.config": "./.importsortrc.js",
+  "editor.tabSize": 2
+}
