@@ -5,11 +5,6 @@ import Paper from '@mui/material/Paper';
 import MainChart from '../components/MainChart';
 
 const Home = () => {
-  // useEffect(() => {
-  //   getTickerCatalog();
-  //   getHistoricalPrices();
-  // }, []);
-
   return (
     <>
       <Paper>
