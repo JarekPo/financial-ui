@@ -1,22 +1,24 @@
 import {financialModelingInstance} from './instances';
 
-export const getTickerCatalog = () => {
+export const getTickerCatalog = async () => {
   try {
-    financialModelingInstance.get('search-ticker', {params: {query: 'a', exchange: 'ETF'}}).then(({data, status}) => {
-      return data;
+    const {data, status} = await financialModelingInstance.get('search-ticker', {
+      params: {query: 'a', exchange: 'ETF'},
     });
+    return [data];
   } catch (error) {
     console.error('Could not fetch data from the Ticker catalog.', error);
+    return [];
   }
 };
-export const getHistoricalPrices = () => {
+export const getHistoricalPrices = async () => {
   try {
-    financialModelingInstance
-      .get('historical-price-full/AAPL', {params: {from: '2023-10-10', to: '2023-10-15'}})
-      .then(({data, status}) => {
-        return data;
-      });
+    const {data, status} = await financialModelingInstance.get('historical-price-full/AAPL', {
+      params: {from: '2023-11-01', to: '2024-01-31'},
+    });
+    return data;
   } catch (error) {
     console.error('Could not fetch the historical prices.', error);
+    return [];
   }
 };
