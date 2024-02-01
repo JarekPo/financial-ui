@@ -16,7 +16,7 @@ import {
 import {useAtom} from 'jotai';
 
 import {getHistoricalPrices} from '../services/FMservices';
-import {endDateAtom, startDateAtom} from '../state/store';
+import {endDateAtom, selectedProductAtom, startDateAtom} from '../state/store';
 import {HistoricalData} from '../types/types';
 
 import 'chartjs-adapter-date-fns';
@@ -70,23 +70,24 @@ const MainChart = () => {
   const [datasets, setDatasets] = useState<Record<string, string | number>[]>([]);
   const [startDate, setStartDate] = useAtom(startDateAtom);
   const [endDate, setEndDate] = useAtom(endDateAtom);
+  const [selectedProduct, setSelectedProduct] = useAtom(selectedProductAtom);
 
   useEffect(() => {
     const fetchHistoricalData = async () => {
       if (endDate) {
-        const data = await getHistoricalPrices(startDate, endDate);
+        const data = await getHistoricalPrices(selectedProduct, startDate, endDate);
         setHistoricalData(data);
       }
     };
     fetchHistoricalData();
-  }, [endDate]);
+  }, [endDate, selectedProduct]);
 
   useEffect(() => {
     createDatasets();
   }, [historicalData]);
 
   const createDatasets = () => {
-    if (historicalData.symbol.length > 0) {
+    if (historicalData.symbol?.length > 0) {
       const dataset = historicalData.historical.map((set: {date: string; open: number}) => {
         return {x: set.date, y: set.open};
       });
@@ -98,6 +99,8 @@ const MainChart = () => {
       });
 
       setDatasets(dataset);
+    } else {
+      setDatasets([]);
     }
   };
 

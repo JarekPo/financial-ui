@@ -5,6 +5,7 @@ import Paper from '@mui/material/Paper';
 
 import DateRangePicker from '../components/DateRangePicker';
 import MainChart from '../components/MainChart';
+import ProductNameInput from '../components/ProductNameInput';
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <Paper sx={{margin: 1, padding: 1}}>
         <Grid container spacing={2} direction='row' justifyContent='space-around' alignItems='center'>
           <DateRangePicker />
+          <ProductNameInput />
         </Grid>
 
         <MainChart />
