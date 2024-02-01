@@ -1,13 +1,19 @@
 import React from 'react';
 
+import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
+import DateRangePicker from '../components/DateRangePicker';
 import MainChart from '../components/MainChart';
 
 const Home = () => {
   return (
     <>
-      <Paper>
+      <Paper sx={{margin: 1, padding: 1}}>
+        <Grid container spacing={2} direction='row' justifyContent='space-around' alignItems='center'>
+          <DateRangePicker />
+        </Grid>
+
         <MainChart />
       </Paper>
     </>
