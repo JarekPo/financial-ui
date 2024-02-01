@@ -1,8 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import DatePicker from 'react-datepicker';
 
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
+import {useAtom} from 'jotai';
+
+import {endDateAtom, startDateAtom} from '../state/store';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -11,8 +14,8 @@ interface DateRangePicker {
   endDate: Date;
 }
 const DateRangePicker = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useAtom(startDateAtom);
+  const [endDate, setEndDate] = useAtom(endDateAtom);
   const onChange = (dates: [Date, Date]) => {
     const [start, end] = dates;
     setStartDate(start);
@@ -26,6 +29,7 @@ const DateRangePicker = () => {
         startDate={startDate}
         endDate={endDate}
         selectsRange
+        dateFormat='dd/MMM/yyyy'
         customInput={
           <TextField
             type='text'

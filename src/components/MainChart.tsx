@@ -13,8 +13,10 @@ import {
   Title,
   Tooltip,
 } from 'chart.js';
+import {useAtom} from 'jotai';
 
 import {getHistoricalPrices} from '../services/FMservices';
+import {endDateAtom, startDateAtom} from '../state/store';
 import {HistoricalData} from '../types/types';
 
 import 'chartjs-adapter-date-fns';
@@ -66,17 +68,22 @@ const MainChart = () => {
     ],
   });
   const [datasets, setDatasets] = useState<Record<string, string | number>[]>([]);
+  const [startDate, setStartDate] = useAtom(startDateAtom);
+  const [endDate, setEndDate] = useAtom(endDateAtom);
+
   useEffect(() => {
     const fetchHistoricalData = async () => {
-      const data = await getHistoricalPrices();
-      setHistoricalData(data);
+      if (endDate) {
+        const data = await getHistoricalPrices(startDate, endDate);
+        setHistoricalData(data);
+      }
     };
     fetchHistoricalData();
-  }, []);
+  }, [endDate]);
 
   useEffect(() => {
     createDatasets();
-  }, [historicalData.symbol]);
+  }, [historicalData]);
 
   const createDatasets = () => {
     if (historicalData.symbol.length > 0) {

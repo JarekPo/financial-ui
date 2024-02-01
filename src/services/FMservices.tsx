@@ -1,3 +1,5 @@
+import format from 'date-fns/format';
+
 import {financialModelingInstance} from './instances';
 
 export const getTickerCatalog = async () => {
@@ -11,10 +13,10 @@ export const getTickerCatalog = async () => {
     return [];
   }
 };
-export const getHistoricalPrices = async () => {
+export const getHistoricalPrices = async (startDate: Date, endDate: Date) => {
   try {
     const {data, status} = await financialModelingInstance.get('historical-price-full/AAPL', {
-      params: {from: '2023-11-01', to: '2024-01-31'},
+      params: {from: format(startDate, 'yyyy-MM-dd'), to: format(endDate, 'yyyy-MM-dd')},
     });
     return data;
   } catch (error) {
