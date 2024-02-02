@@ -7,6 +7,7 @@ import DateRangePicker from '../components/DateRangePicker';
 import MainChart from '../components/MainChart';
 import MetricsSelector from '../components/MetricsSelector';
 import ProductNameInput from '../components/ProductNameInput';
+import ProductSummaryCard from '../components/ProductSummaryCard';
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
           <DateRangePicker />
           <ProductNameInput />
           <MetricsSelector />
+          <ProductSummaryCard />
         </Grid>
 
         <MainChart />
