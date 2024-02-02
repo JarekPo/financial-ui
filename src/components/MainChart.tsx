@@ -15,9 +15,10 @@ import {
 } from 'chart.js';
 import {useAtom} from 'jotai';
 
+import {chartOptions} from '../constants/constants';
 import {getHistoricalPrices} from '../services/FMservices';
-import {endDateAtom, startDateAtom} from '../state/store';
-import {HistoricalData} from '../types/types';
+import {endDateAtom, selectedMetricAtom, selectedProductAtom, startDateAtom} from '../state/store';
+import {DatasetMetrics, HistoricalData, ProductMetric} from '../types/types';
 
 import 'chartjs-adapter-date-fns';
 
@@ -32,19 +33,6 @@ ChartJS.register(
   TimeScale,
   TimeSeriesScale
 );
-
-export const chartOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
-    },
-    title: {
-      display: true,
-      text: 'Financial Data',
-    },
-  },
-};
 
 const MainChart = () => {
   const [historicalData, setHistoricalData] = useState<HistoricalData>({
@@ -70,25 +58,27 @@ const MainChart = () => {
   const [datasets, setDatasets] = useState<Record<string, string | number>[]>([]);
   const [startDate, setStartDate] = useAtom(startDateAtom);
   const [endDate, setEndDate] = useAtom(endDateAtom);
+  const [selectedProduct, setSelectedProduct] = useAtom(selectedProductAtom);
+  const [selectedMetric, setSelectedMetric] = useAtom(selectedMetricAtom);
 
   useEffect(() => {
     const fetchHistoricalData = async () => {
       if (endDate) {
-        const data = await getHistoricalPrices(startDate, endDate);
+        const data = await getHistoricalPrices(selectedProduct, startDate, endDate);
         setHistoricalData(data);
       }
     };
     fetchHistoricalData();
-  }, [endDate]);
+  }, [endDate, selectedProduct]);
 
   useEffect(() => {
     createDatasets();
-  }, [historicalData]);
+  }, [historicalData, selectedMetric]);
 
   const createDatasets = () => {
-    if (historicalData.symbol.length > 0) {
-      const dataset = historicalData.historical.map((set: {date: string; open: number}) => {
-        return {x: set.date, y: set.open};
+    if (historicalData.symbol?.length > 0) {
+      const dataset = historicalData.historical.map((set: DatasetMetrics) => {
+        return {x: set.date, y: set[selectedMetric as ProductMetric]};
       });
 
       dataset.sort((a, b) => {
@@ -98,6 +88,8 @@ const MainChart = () => {
       });
 
       setDatasets(dataset);
+    } else {
+      setDatasets([]);
     }
   };
 
@@ -106,7 +98,7 @@ const MainChart = () => {
     datasets: [
       {
         tension: 0.3,
-        label: `${historicalData.symbol} Open`,
+        label: datasets.length ? `${historicalData.symbol} ${selectedMetric}` : 'No data',
         data: datasets,
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(200, 99, 132, 0.5)',

@@ -18,3 +18,32 @@ export interface HistoricalData {
     },
   ];
 }
+
+export interface DatasetMetrics {
+  date: string;
+  open: number;
+  close: number;
+  adjClose: number;
+  high: number;
+  low: number;
+  volume: number;
+  unadjustedVolume: number;
+  change: number;
+  changePercent: number;
+  changeOverTime: number;
+  vwap: number;
+}
+
+export type ProductMetric =
+  | 'date'
+  | 'open'
+  | 'close'
+  | 'adjClose'
+  | 'high'
+  | 'low'
+  | 'volume'
+  | 'unadjustedVolume'
+  | 'change'
+  | 'changePercent'
+  | 'changeOverTime'
+  | 'vwap';

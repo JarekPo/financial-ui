@@ -30,6 +30,7 @@ const DateRangePicker = () => {
         endDate={endDate}
         selectsRange
         dateFormat='dd/MMM/yyyy'
+        showYearDropdown
         customInput={
           <TextField
             type='text'
