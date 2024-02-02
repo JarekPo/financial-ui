@@ -5,3 +5,4 @@ export const startDateAtom = atom(subMonths(new Date(), 3));
 export const endDateAtom = atom(new Date());
 export const productOptionsAtom = atom([]);
 export const selectedProductAtom = atom('AAPL');
+export const selectedMetricAtom = atom('close');
