@@ -5,7 +5,7 @@ import {financialModelingInstance} from './instances';
 export const getTickerCatalog = async (query: string) => {
   try {
     const {data, status} = await financialModelingInstance.get('search-ticker', {
-      params: {query: query, exchange: 'ETF'},
+      params: {query: query},
     });
     return [data];
   } catch (error) {

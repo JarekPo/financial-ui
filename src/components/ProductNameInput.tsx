@@ -43,7 +43,13 @@ const ProductNameInput = () => {
           sx={{width: 500}}
           onChange={handleProductChange}
           renderInput={(params) => (
-            <TextField {...params} label='Product' size='small' onChange={(e) => fetchCatalogData(e.target.value)} />
+            <TextField
+              {...params}
+              label='Product'
+              size='small'
+              onChange={(e) => fetchCatalogData(e.target.value)}
+              placeholder={'Search by Symbol'}
+            />
           )}
         />
       </Grid>
