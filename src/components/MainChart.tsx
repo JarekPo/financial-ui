@@ -17,8 +17,8 @@ import {useAtom} from 'jotai';
 
 import {chartOptions} from '../constants/constants';
 import {getHistoricalPrices} from '../services/FMservices';
-import {endDateAtom, selectedMetricAtom, selectedProductAtom, startDateAtom} from '../state/store';
-import {DatasetMetrics, HistoricalData, ProductMetric} from '../types/types';
+import {endDateAtom, historicalDataAtom, selectedMetricAtom, selectedProductAtom, startDateAtom} from '../state/store';
+import {DatasetMetrics, ProductMetric} from '../types/types';
 
 import 'chartjs-adapter-date-fns';
 
@@ -35,26 +35,7 @@ ChartJS.register(
 );
 
 const MainChart = () => {
-  const [historicalData, setHistoricalData] = useState<HistoricalData>({
-    symbol: '',
-    historical: [
-      {
-        adjClose: 0,
-        change: 0,
-        changeOverTime: 0,
-        changePercent: 0,
-        close: 0,
-        date: '',
-        high: 0,
-        label: '',
-        low: 0,
-        open: 0,
-        unadjustedVolume: 0,
-        volume: 0,
-        vwap: 0,
-      },
-    ],
-  });
+  const [historicalData, setHistoricalData] = useAtom(historicalDataAtom);
   const [datasets, setDatasets] = useState<Record<string, string | number>[]>([]);
   const [startDate, setStartDate] = useAtom(startDateAtom);
   const [endDate, setEndDate] = useAtom(endDateAtom);
@@ -64,7 +45,7 @@ const MainChart = () => {
   useEffect(() => {
     const fetchHistoricalData = async () => {
       if (endDate) {
-        const data = await getHistoricalPrices(selectedProduct, startDate, endDate);
+        const data = await getHistoricalPrices(selectedProduct.id, startDate, endDate);
         setHistoricalData(data);
       }
     };

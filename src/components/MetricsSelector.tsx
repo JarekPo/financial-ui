@@ -27,7 +27,7 @@ const MetricsSelector = () => {
             label='Metrics'
             onChange={handleChangeMetric}
             size='small'
-            sx={{width: 100}}
+            sx={{width: 182}}
           >
             {METRICS.map((metric) => (
               <MenuItem key={metric} value={metric}>

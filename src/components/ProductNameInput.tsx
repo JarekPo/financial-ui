@@ -19,17 +19,29 @@ const ProductNameInput = () => {
 
   const fetchCatalogData = async (userInput: string) => {
     const data = await getTickerCatalog(userInput);
-    const products = data[0].map((product: {name: string; symbol: string}) => {
-      return {
-        label: `${product.name} (${product.symbol})`,
-        id: product.symbol,
-      };
-    });
+    const products = data[0].map(
+      (product: {name: string; symbol: string; currency: string; exchangeShortName: string}) => {
+        return {
+          label: `${product.name} (${product.symbol})`,
+          id: product.symbol,
+          currency: product.currency,
+          stockExchange: product.exchangeShortName,
+        };
+      }
+    );
     setCatalogProducts(products);
   };
 
-  const handleProductChange = (e: SyntheticEvent<Element, Event>, value: null | {label: string; id: string}) => {
-    const selectedProduct = value?.id || '';
+  const handleProductChange = (
+    e: SyntheticEvent<Element, Event>,
+    value: null | {label: string; id: string; currency: string; stockExchange: string}
+  ) => {
+    const selectedProduct = {
+      id: value?.id || '',
+      label: value?.label || '',
+      currency: value?.currency || '',
+      stockExchange: value?.stockExchange || '',
+    };
     setSelectedProduct(selectedProduct);
   };
 
@@ -40,7 +52,7 @@ const ProductNameInput = () => {
           disablePortal
           id='product-autocomplete'
           options={catalogProducts}
-          sx={{width: 500}}
+          sx={{width: 440}}
           onChange={handleProductChange}
           renderInput={(params) => (
             <TextField
