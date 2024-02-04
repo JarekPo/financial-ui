@@ -6,7 +6,7 @@ export const chartOptions = {
     },
     title: {
       display: true,
-      text: 'Financial Data',
+      text: 'Financial Instruments Analysis',
     },
   },
 };
