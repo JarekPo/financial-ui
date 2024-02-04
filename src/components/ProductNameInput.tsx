@@ -52,7 +52,7 @@ const ProductNameInput = () => {
           disablePortal
           id='product-autocomplete'
           options={catalogProducts}
-          sx={{width: 440}}
+          sx={{width: 380}}
           onChange={handleProductChange}
           renderInput={(params) => (
             <TextField

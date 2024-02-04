@@ -79,7 +79,7 @@ const MainChart = () => {
     datasets: [
       {
         tension: 0.3,
-        label: datasets.length ? `${historicalData.symbol} ${selectedMetric}` : 'No data',
+        label: datasets.length ? `${selectedProduct.label} - ${selectedMetric}` : 'No data',
         data: datasets,
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(200, 99, 132, 0.5)',
