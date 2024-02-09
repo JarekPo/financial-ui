@@ -29,6 +29,7 @@ import {
   startDateAtom,
 } from '../state/store';
 import {DatasetMetrics, ProductMetric} from '../types/types';
+import ChartTypeSelector from './ChartTypeSelector';
 
 import 'chartjs-adapter-date-fns';
 
@@ -94,8 +95,8 @@ const MainChart = () => {
           tension: 0.3,
           label: datasets.length ? `${selectedProduct.label} - ${selectedMetric}` : 'No data',
           data: datasets,
-          borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: chartType === ChartType.line ? 'rgba(200, 99, 132, 0.5)' : 'rgba(39, 131, 245, 0.8)',
+          borderColor: 'rgba(10, 131, 245, 0.8)',
+          backgroundColor: 'rgba(39, 131, 245, 0.8)',
         },
       ],
     };
@@ -103,6 +104,7 @@ const MainChart = () => {
 
   return (
     <>
+      <ChartTypeSelector />
       {chartType === ChartType.line && <Line data={chartData} options={chartOptions} style={{maxHeight: '80vh'}} />}
       {chartType === ChartType.bar && <Bar data={chartData} options={chartOptions} style={{maxHeight: '80vh'}} />}
     </>
