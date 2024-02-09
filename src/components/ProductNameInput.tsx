@@ -30,6 +30,9 @@ const ProductNameInput = () => {
       }
     );
     setCatalogProducts(products);
+    if (!selectedProduct.id) {
+      setSelectedProduct(products[0]);
+    }
   };
 
   const handleProductChange = (
@@ -45,6 +48,12 @@ const ProductNameInput = () => {
     setSelectedProduct(selectedProduct);
   };
 
+  const handleProductSearch = (e: {target: {value: string}}) => {
+    if (e.target.value.length >= 2) {
+      fetchCatalogData(e.target.value);
+    }
+  };
+
   return (
     <>
       <Grid item>
@@ -57,9 +66,9 @@ const ProductNameInput = () => {
           renderInput={(params) => (
             <TextField
               {...params}
-              label='Product'
+              label='Search Product'
               size='small'
-              onChange={(e) => fetchCatalogData(e.target.value)}
+              onChange={handleProductSearch}
               placeholder={'Search by Symbol'}
             />
           )}
