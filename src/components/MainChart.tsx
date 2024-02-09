@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {Line} from 'react-chartjs-2';
 
 import {
@@ -44,7 +44,7 @@ const MainChart = () => {
 
   useEffect(() => {
     const fetchHistoricalData = async () => {
-      if (endDate) {
+      if (endDate && selectedProduct.id) {
         const data = await getHistoricalPrices(selectedProduct.id, startDate, endDate);
         setHistoricalData(data);
       }
@@ -74,18 +74,19 @@ const MainChart = () => {
     }
   };
 
-  const chartData = {
-    // labels,
-    datasets: [
-      {
-        tension: 0.3,
-        label: datasets.length ? `${selectedProduct.label} - ${selectedMetric}` : 'No data',
-        data: datasets,
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(200, 99, 132, 0.5)',
-      },
-    ],
-  };
+  const chartData = useMemo(() => {
+    return {
+      datasets: [
+        {
+          tension: 0.3,
+          label: datasets.length ? `${selectedProduct.label} - ${selectedMetric}` : 'No data',
+          data: datasets,
+          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(200, 99, 132, 0.5)',
+        },
+      ],
+    };
+  }, [historicalData]);
 
   return (
     <>

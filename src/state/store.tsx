@@ -5,10 +5,10 @@ export const startDateAtom = atom(subMonths(new Date(), 3));
 export const endDateAtom = atom(new Date());
 export const productOptionsAtom = atom([]);
 export const selectedProductAtom = atom({
-  id: 'AAPL',
-  label: 'Kurv Yield Premium Strategy Apple (AAPL) ETF',
-  currency: 'USD',
-  stockExchange: 'Cboe US',
+  id: '',
+  label: '',
+  currency: '',
+  stockExchange: '',
 });
 export const selectedMetricAtom = atom('close');
 export const historicalDataAtom = atom({
