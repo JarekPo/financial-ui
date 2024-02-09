@@ -31,3 +31,4 @@ export const historicalDataAtom = atom({
     },
   ],
 });
+export const chartTypeAtom = atom('line');

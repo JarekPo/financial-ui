@@ -25,3 +25,8 @@ export const METRICS = [
   'changeOverTime',
   'vwap',
 ];
+
+export enum ChartType {
+  bar = 'bar',
+  line = 'line',
+}

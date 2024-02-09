@@ -1,7 +1,10 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {Line} from 'react-chartjs-2';
+import {Bar} from 'react-chartjs-2';
 
 import {
+  BarController,
+  BarElement,
   CategoryScale,
   Chart as ChartJS,
   Legend,
@@ -15,10 +18,18 @@ import {
 } from 'chart.js';
 import {useAtom} from 'jotai';
 
-import {chartOptions} from '../constants/constants';
+import {chartOptions, ChartType} from '../constants/constants';
 import {getHistoricalPrices} from '../services/FMservices';
-import {endDateAtom, historicalDataAtom, selectedMetricAtom, selectedProductAtom, startDateAtom} from '../state/store';
+import {
+  chartTypeAtom,
+  endDateAtom,
+  historicalDataAtom,
+  selectedMetricAtom,
+  selectedProductAtom,
+  startDateAtom,
+} from '../state/store';
 import {DatasetMetrics, ProductMetric} from '../types/types';
+import ChartTypeSelector from './ChartTypeSelector';
 
 import 'chartjs-adapter-date-fns';
 
@@ -31,7 +42,9 @@ ChartJS.register(
   Tooltip,
   Legend,
   TimeScale,
-  TimeSeriesScale
+  TimeSeriesScale,
+  BarElement,
+  BarController
 );
 
 const MainChart = () => {
@@ -41,6 +54,7 @@ const MainChart = () => {
   const [endDate, setEndDate] = useAtom(endDateAtom);
   const [selectedProduct, setSelectedProduct] = useAtom(selectedProductAtom);
   const [selectedMetric, setSelectedMetric] = useAtom(selectedMetricAtom);
+  const [chartType, setChartType] = useAtom(chartTypeAtom);
 
   useEffect(() => {
     const fetchHistoricalData = async () => {
@@ -81,16 +95,18 @@ const MainChart = () => {
           tension: 0.3,
           label: datasets.length ? `${selectedProduct.label} - ${selectedMetric}` : 'No data',
           data: datasets,
-          borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: 'rgba(200, 99, 132, 0.5)',
+          borderColor: 'rgba(10, 131, 245, 0.8)',
+          backgroundColor: 'rgba(39, 131, 245, 0.8)',
         },
       ],
     };
-  }, [historicalData]);
+  }, [historicalData, datasets]);
 
   return (
     <>
-      <Line data={chartData} options={chartOptions} style={{maxHeight: '80vh'}} />
+      <ChartTypeSelector />
+      {chartType === ChartType.line && <Line data={chartData} options={chartOptions} style={{maxHeight: '80vh'}} />}
+      {chartType === ChartType.bar && <Bar data={chartData} options={chartOptions} style={{maxHeight: '80vh'}} />}
     </>
   );
 };
