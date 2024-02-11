@@ -7,7 +7,7 @@ This UI application has been deployed on the Render platform and the CI/CD pipel
 
 #### [Address](https://financial-ui.onrender.com)
 
-The application is available at: https://financial-api-blush.vercel.app/
+The application is available at: https://financial-ui.onrender.com
 
 
 #### [Financial Insruments](https://github.com/users/JarekPo/projects/1/views/1)
