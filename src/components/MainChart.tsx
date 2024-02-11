@@ -2,6 +2,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {Line} from 'react-chartjs-2';
 import {Bar} from 'react-chartjs-2';
 
+import LinearProgress from '@mui/material/LinearProgress';
 import {
   BarController,
   BarElement,
@@ -55,12 +56,15 @@ const MainChart = () => {
   const [selectedProduct, setSelectedProduct] = useAtom(selectedProductAtom);
   const [selectedMetric, setSelectedMetric] = useAtom(selectedMetricAtom);
   const [chartType, setChartType] = useAtom(chartTypeAtom);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchHistoricalData = async () => {
       if (endDate && selectedProduct.id) {
+        setIsLoading(true);
         const data = await getHistoricalPrices(selectedProduct.id, startDate, endDate);
         setHistoricalData(data);
+        setIsLoading(false);
       }
     };
     fetchHistoricalData();
@@ -105,8 +109,9 @@ const MainChart = () => {
   return (
     <>
       <ChartTypeSelector />
-      {chartType === ChartType.line && <Line data={chartData} options={chartOptions} style={{maxHeight: '80vh'}} />}
-      {chartType === ChartType.bar && <Bar data={chartData} options={chartOptions} style={{maxHeight: '80vh'}} />}
+      {isLoading && <LinearProgress />}
+      {chartType === ChartType.line && <Line data={chartData} options={chartOptions} style={{maxHeight: '72vh'}} />}
+      {chartType === ChartType.bar && <Bar data={chartData} options={chartOptions} style={{maxHeight: '72vh'}} />}
     </>
   );
 };

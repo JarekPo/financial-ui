@@ -19,7 +19,7 @@ export const ChartTypeSelector = () => {
   };
 
   return (
-    <Grid container spacing={2} direction='row' justifyContent='center' alignItems='center'>
+    <Grid container spacing={2} direction='row' justifyContent='center' alignItems='center' margin={0.2}>
       <Grid item>
         <Typography variant='body1'>Chart Type</Typography>
       </Grid>
