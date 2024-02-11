@@ -1,12 +1,17 @@
 export const chartOptions = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: 'top' as const,
     },
     title: {
       display: true,
-      text: 'Financial Instruments Analysis',
+
+      text: 'Price Evolution of Financial Instruments',
+      font: {
+        size: 13,
+      },
     },
   },
 };
