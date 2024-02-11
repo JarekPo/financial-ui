@@ -15,8 +15,12 @@ export const getTickerCatalog = async (query: string) => {
 };
 export const getHistoricalPrices = async (selectedProduct: string, startDate: Date, endDate: Date) => {
   try {
-    const {data, status} = await financialModelingInstance.get(`historical-price-full/${selectedProduct}`, {
-      params: {from: format(startDate, 'yyyy-MM-dd'), to: format(endDate, 'yyyy-MM-dd')},
+    const {data, status} = await financialModelingInstance.get(`historical-price`, {
+      params: {
+        symbol: selectedProduct,
+        date_start: format(startDate, 'yyyy-MM-dd'),
+        date_end: format(endDate, 'yyyy-MM-dd'),
+      },
     });
     return data;
   } catch (error) {
