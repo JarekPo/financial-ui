@@ -14,8 +14,9 @@ import {themeAtom} from '../state/store';
 export const ThemeToggler = () => {
   const [theme, setTheme] = useAtom(themeAtom);
 
-  const handleThemeSelect = (e: MouseEvent<HTMLElement>, selectedType: string) => {
-    setTheme(selectedType);
+  const handleThemeSelect = (e: MouseEvent<HTMLElement>, selectedTheme: string) => {
+    setTheme(selectedTheme as Theme);
+    localStorage.setItem('theme', selectedTheme);
   };
 
   return (
