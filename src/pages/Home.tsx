@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
 import DateRangePicker from '../components/DateRangePicker';
+import Disclaimer from '../components/Disclaimer';
 import MainChart from '../components/MainChart';
 import MetricsSelector from '../components/MetricsSelector';
 import ProductNameInput from '../components/ProductNameInput';
@@ -22,6 +23,7 @@ const Home = () => {
 
         <MainChart />
       </Paper>
+      <Disclaimer />
     </>
   );
 };
