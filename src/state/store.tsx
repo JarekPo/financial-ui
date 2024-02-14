@@ -1,6 +1,8 @@
 import subMonths from 'date-fns/subMonths';
 import {atom} from 'jotai';
 
+import {Theme} from '../constants/constants';
+
 export const startDateAtom = atom(subMonths(new Date(), 3));
 export const endDateAtom = atom(new Date());
 export const productOptionsAtom = atom([]);
@@ -32,3 +34,4 @@ export const historicalDataAtom = atom({
   ],
 });
 export const chartTypeAtom = atom('line');
+export const themeAtom = atom(localStorage.getItem('theme') === Theme.dark ? Theme.dark : Theme.light);

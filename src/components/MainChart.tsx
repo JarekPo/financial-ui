@@ -30,7 +30,7 @@ import {
   startDateAtom,
 } from '../state/store';
 import {DatasetMetrics, ProductMetric} from '../types/types';
-import ChartTypeSelector from './ChartTypeSelector';
+import ChartSettings from './ChartSettings';
 
 import 'chartjs-adapter-date-fns';
 
@@ -108,7 +108,7 @@ const MainChart = () => {
 
   return (
     <>
-      <ChartTypeSelector />
+      <ChartSettings />
       {isLoading && <LinearProgress />}
       {chartType === ChartType.line && <Line data={chartData} options={chartOptions} style={{maxHeight: '72vh'}} />}
       {chartType === ChartType.bar && <Bar data={chartData} options={chartOptions} style={{maxHeight: '72vh'}} />}

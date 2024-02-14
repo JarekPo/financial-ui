@@ -35,3 +35,8 @@ export enum ChartType {
   bar = 'bar',
   line = 'line',
 }
+
+export enum Theme {
+  light = 'light',
+  dark = 'dark',
+}
