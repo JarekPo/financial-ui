@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {MouseEvent} from 'react';
 
 import BarChartIcon from '@mui/icons-material/BarChart';
 import TimelineIcon from '@mui/icons-material/Timeline';
@@ -14,12 +14,12 @@ import {chartTypeAtom} from '../state/store';
 export const ChartTypeSelector = () => {
   const [chartType, setChartType] = useAtom(chartTypeAtom);
 
-  const handleChartTypeSelect = (e: React.MouseEvent<HTMLElement>, selectedType: string) => {
+  const handleChartTypeSelect = (e: MouseEvent<HTMLElement>, selectedType: string) => {
     setChartType(selectedType);
   };
 
   return (
-    <Grid container spacing={2} direction='row' justifyContent='center' alignItems='center' margin={0.2}>
+    <>
       <Grid item>
         <Typography variant='body1'>Chart Type</Typography>
       </Grid>
@@ -33,7 +33,7 @@ export const ChartTypeSelector = () => {
           </ToggleButton>
         </ToggleButtonGroup>
       </Grid>
-    </Grid>
+    </>
   );
 };
 

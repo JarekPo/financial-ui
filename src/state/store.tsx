@@ -32,3 +32,4 @@ export const historicalDataAtom = atom({
   ],
 });
 export const chartTypeAtom = atom('line');
+export const themeAtom = atom('light');
