@@ -15,6 +15,10 @@ const Disclaimer = () => {
           <Link href='https://github.com/JarekPo' underline='hover' target='_blank'>
             JarekPo
           </Link>
+          . Data provided by{' '}
+          <Link href='https://financialmodelingprep.com/developer/docs/' underline='none' target='_blank'>
+            Financial Modeling Prep
+          </Link>
           .
         </Typography>
       </Paper>
