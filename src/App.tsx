@@ -1,8 +1,11 @@
 import React from 'react';
 
+import Paper from '@mui/material/Paper';
 import {ThemeProvider} from '@mui/material/styles';
 import {useAtom} from 'jotai';
 
+import Navigation from './components/Navigation';
+import {Theme} from './constants/constants';
 import Home from './pages/Home';
 import {themeAtom} from './state/store';
 import {darkTheme, lightTheme} from './theme/createTheme';
@@ -13,8 +16,11 @@ const App = () => {
   const [theme, setTheme] = useAtom(themeAtom);
   return (
     <>
-      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-        <Home />
+      <ThemeProvider theme={theme === Theme.light ? lightTheme : darkTheme}>
+        <Paper>
+          <Navigation />
+          <Home />
+        </Paper>
       </ThemeProvider>
     </>
   );
