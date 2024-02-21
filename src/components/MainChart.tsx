@@ -110,8 +110,8 @@ const MainChart = () => {
     <>
       <ChartSettings />
       {isLoading && <LinearProgress />}
-      {chartType === ChartType.line && <Line data={chartData} options={chartOptions} style={{maxHeight: '72vh'}} />}
-      {chartType === ChartType.bar && <Bar data={chartData} options={chartOptions} style={{maxHeight: '72vh'}} />}
+      {chartType === ChartType.line && <Line data={chartData} options={chartOptions} style={{maxHeight: '66vh'}} />}
+      {chartType === ChartType.bar && <Bar data={chartData} options={chartOptions} style={{maxHeight: '66vh'}} />}
     </>
   );
 };
