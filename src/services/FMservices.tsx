@@ -1,10 +1,10 @@
 import format from 'date-fns/format';
 
-import {financialModelingInstance} from './instances';
+import {financialBackendInstance} from './instances';
 
 export const getTickerCatalog = async (query: string) => {
   try {
-    const {data, status} = await financialModelingInstance.get('search-ticker', {
+    const {data, status} = await financialBackendInstance.get('search-ticker', {
       params: {query: query},
     });
     return [data];
@@ -13,9 +13,10 @@ export const getTickerCatalog = async (query: string) => {
     return [];
   }
 };
+
 export const getHistoricalPrices = async (selectedProduct: string, startDate: Date, endDate: Date) => {
   try {
-    const {data, status} = await financialModelingInstance.get(`historical-price`, {
+    const {data, status} = await financialBackendInstance.get(`historical-price`, {
       params: {
         symbol: selectedProduct,
         date_start: format(startDate, 'yyyy-MM-dd'),
@@ -25,6 +26,16 @@ export const getHistoricalPrices = async (selectedProduct: string, startDate: Da
     return data;
   } catch (error) {
     console.error('Could not fetch the historical prices.', error);
+    return [];
+  }
+};
+
+export const getCountries = async () => {
+  try {
+    const {data, status} = await financialBackendInstance.get('country-data');
+    return data;
+  } catch (error) {
+    console.error('Could not fetch the caontries.', error);
     return [];
   }
 };

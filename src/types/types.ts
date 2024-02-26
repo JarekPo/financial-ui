@@ -47,3 +47,8 @@ export type ProductMetric =
   | 'changePercent'
   | 'changeOverTime'
   | 'vwap';
+
+export interface CountriesData {
+  country: string;
+  exchange: string;
+}
