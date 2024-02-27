@@ -13,7 +13,7 @@ import ProductSummaryCard from '../components/ProductSummaryCard';
 const Home = () => {
   return (
     <>
-      <Paper sx={{margin: 1, padding: 1}}>
+      <Paper sx={{margin: 1, padding: 2}}>
         <Grid container spacing={2} direction='row' justifyContent='space-around' alignItems='center'>
           <DateRangePicker />
           <ProductNameInput />

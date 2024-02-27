@@ -19,7 +19,7 @@ const MetricsSelector = () => {
     <>
       <Grid item>
         <FormControl>
-          <InputLabel id='test-select-label'>Metrics</InputLabel>
+          <InputLabel id='metrics-select-label'>Metrics</InputLabel>
           <Select
             labelId='metrics-selector'
             id='metrics-selector'
