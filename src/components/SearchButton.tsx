@@ -12,7 +12,7 @@ const SearchButton = () => {
   const [stockSearchParams, setStockSearchParams] = useAtom(stockSerachParamsAtom);
 
   const handleSearchClick = async () => {
-    const responce = await getStockSearchResults(
+    const response = await getStockSearchResults(
       stockSearchParams.country,
       stockSearchParams.exchange,
       stockSearchParams.symbol,
