@@ -29,7 +29,6 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'prettier', 'jest', 'simple-import-sort', 'unused-imports'],
   // Rule settings
   rules: {
-    // Example advanced rules
     '@typescript-eslint/explicit-function-return-type': 'off', // Disables checking for explicit return types
     '@typescript-eslint/ban-types': 'warn', // Warning for banning certain types
     '@typescript-eslint/ban-ts-comment': 'off', // Disables @ts-ignore comments

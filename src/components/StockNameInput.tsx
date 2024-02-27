@@ -2,9 +2,21 @@ import React, {useState} from 'react';
 
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
+import {useAtom} from 'jotai';
+
+import {stockSerachParamsAtom} from '../state/store';
 
 const StockNameInput = () => {
   const [stockName, setStockName] = useState('');
+  const [stockSearchParams, setStockSearchParams] = useAtom(stockSerachParamsAtom);
+
+  const handleStockNameImput = (e: any) => {
+    setStockName(e.target.value);
+    setStockSearchParams({
+      ...stockSearchParams,
+      name: e.target.value,
+    });
+  };
   return (
     <>
       <Grid item>
@@ -13,9 +25,7 @@ const StockNameInput = () => {
           size='small'
           sx={{width: 300}}
           value={stockName}
-          onChange={(e) => {
-            setStockName(e.target.value);
-          }}
+          onChange={handleStockNameImput}
           placeholder={'Stock Name'}
         />
       </Grid>

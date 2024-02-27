@@ -5,6 +5,7 @@ import Paper from '@mui/material/Paper';
 
 import CountrySelector from '../components/CountrySelector';
 import ExchangeSelector from '../components/ExchangeSelector';
+import SearchButton from '../components/SearchButton';
 import StockNameInput from '../components/StockNameInput';
 import SymbolInput from '../components/SymbolInput';
 
@@ -17,6 +18,7 @@ const SearchStock = () => {
           <CountrySelector />
           <ExchangeSelector />
           <SymbolInput />
+          <SearchButton />
         </Grid>
       </Paper>
     </>

@@ -39,3 +39,25 @@ export const getCountries = async () => {
     return [];
   }
 };
+
+export const getStockSearchResults = async (
+  country: string | null,
+  exchange: string | null,
+  symbol: string | null,
+  name: string | null
+) => {
+  try {
+    const {data, status} = await financialBackendInstance.get('stock-search', {
+      params: {
+        country: country,
+        exchange: exchange,
+        symbol: symbol,
+        name: name,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error('Could not fetch the search results.', error);
+    return [];
+  }
+};

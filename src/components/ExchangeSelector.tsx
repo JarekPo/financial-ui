@@ -7,18 +7,27 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import {useAtom} from 'jotai';
 
-import {exchangesAtom} from '../state/store';
+import {exchangesAtom, stockSerachParamsAtom} from '../state/store';
 
 const ExchangeSelector = () => {
   const [exchanges, setExchanges] = useAtom(exchangesAtom);
   const [exchange, setExchange] = useState('');
+  const [stockSearchParams, setStockSearchParams] = useAtom(stockSerachParamsAtom);
 
   useEffect(() => {
     setExchange(exchanges[0]);
+    setStockSearchParams({
+      ...stockSearchParams,
+      exchange: exchanges[0],
+    });
   }, [exchanges]);
 
   const handleChangeExchange = (e: {target: {value: string}}) => {
     setExchange(e.target.value);
+    setStockSearchParams({
+      ...stockSearchParams,
+      exchange: e.target.value,
+    });
   };
 
   return (
