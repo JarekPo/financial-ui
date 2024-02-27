@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import Paper from '@mui/material/Paper';
 import {ThemeProvider} from '@mui/material/styles';
@@ -15,14 +16,20 @@ import './App.css';
 
 const App = () => {
   const [theme, setTheme] = useAtom(themeAtom);
+
   return (
     <>
       <ThemeProvider theme={theme === Theme.light ? lightTheme : darkTheme}>
-        <Paper>
-          <Navigation />
-          <Home />
-          <SearchStock />
-        </Paper>
+        <BrowserRouter>
+          <Paper>
+            <Navigation />
+
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/search-stock' element={<SearchStock />} />
+            </Routes>
+          </Paper>
+        </BrowserRouter>
       </ThemeProvider>
     </>
   );

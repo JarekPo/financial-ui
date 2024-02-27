@@ -1,10 +1,11 @@
-import React, {SyntheticEvent, useState} from 'react';
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
+import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
+import Stack from '@mui/material/Stack';
 import {useAtom} from 'jotai';
 
 import logo from '../assets/logo.png';
@@ -13,19 +14,31 @@ import {Theme} from '../constants/constants';
 import {themeAtom} from '../state/store';
 
 const Navigation = () => {
-  const [value, setValue] = useState('home');
+  const [value, setValue] = useState<number>(1);
   const [theme, setTheme] = useAtom(themeAtom);
 
-  const handleTabChange = (event: SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
   return (
     <Paper sx={{margin: 1}}>
-      <Tabs value={value} onChange={handleTabChange} aria-label='navigation tabs'>
-        <img src={theme == Theme.light ? logo : logoDark} alt='logo' style={{width: '90px', marginRight: 15}} />
-        <Tab icon={<HomeIcon />} iconPosition='top' label='home' value={'home'} />
-        <Tab icon={<SearchIcon />} iconPosition='top' label='serch stock' value={'serch-stock'} />
-      </Tabs>
+      <Stack direction='row'>
+        <Link to='/'>
+          <img
+            src={theme == Theme.light ? logo : logoDark}
+            alt='logo'
+            style={{width: '70px', marginRight: 10, padding: 5}}
+          />
+        </Link>
+
+        <Link to='/'>
+          <Button startIcon={<HomeIcon />} size='large' sx={{padding: 2.5}}>
+            Home
+          </Button>
+        </Link>
+        <Link to='/search-stock'>
+          <Button startIcon={<SearchIcon />} size='large' sx={{padding: 2.5}}>
+            Serch Stock
+          </Button>
+        </Link>
+      </Stack>
     </Paper>
   );
 };
