@@ -7,6 +7,7 @@ import CountrySelector from '../components/CountrySelector';
 import ExchangeSelector from '../components/ExchangeSelector';
 import SearchButton from '../components/SearchButton';
 import StockNameInput from '../components/StockNameInput';
+import StocksTable from '../components/StocksTable';
 import SymbolInput from '../components/SymbolInput';
 
 const SearchStock = () => {
@@ -19,6 +20,9 @@ const SearchStock = () => {
           <ExchangeSelector />
           <SymbolInput />
           <SearchButton />
+        </Grid>
+        <Grid container sx={{padding: 2}} direction='row' justifyContent='space-around' alignItems='center'>
+          <StocksTable />
         </Grid>
       </Paper>
     </>
