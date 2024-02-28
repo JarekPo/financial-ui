@@ -2,8 +2,6 @@ import React, {MouseEvent} from 'react';
 
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
-import {Typography} from '@mui/material';
-import Grid from '@mui/material/Grid';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import {useAtom} from 'jotai';
@@ -21,19 +19,14 @@ export const ThemeToggler = () => {
 
   return (
     <>
-      <Grid item>
-        <Typography variant='body1'>Theme</Typography>
-      </Grid>
-      <Grid item>
-        <ToggleButtonGroup value={theme} exclusive aria-label='theme change buttons'>
-          <ToggleButton value={Theme.light} onClick={handleThemeSelect} aria-label='light theme'>
-            <LightModeIcon />
-          </ToggleButton>
-          <ToggleButton value={Theme.dark} onClick={handleThemeSelect} aria-label='dark theme'>
-            <DarkModeIcon />
-          </ToggleButton>
-        </ToggleButtonGroup>
-      </Grid>
+      <ToggleButtonGroup size='small' value={theme} exclusive aria-label='theme change buttons'>
+        <ToggleButton value={Theme.light} onClick={handleThemeSelect} aria-label='light theme'>
+          <LightModeIcon />
+        </ToggleButton>
+        <ToggleButton value={Theme.dark} onClick={handleThemeSelect} aria-label='dark theme'>
+          <DarkModeIcon />
+        </ToggleButton>
+      </ToggleButtonGroup>
     </>
   );
 };
