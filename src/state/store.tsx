@@ -42,3 +42,4 @@ export const stockSerachParamsAtom = atom({
   symbol: '',
   name: '',
 });
+export const stocksDataAtom = atom([]);

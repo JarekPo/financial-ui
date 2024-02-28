@@ -32,7 +32,7 @@ const CountrySelector = () => {
     });
     const selectedExchange = countries.find((item: CountriesData) => item.country === value);
     if (selectedExchange?.exchange !== undefined) {
-      const exchangesList = selectedExchange?.exchange.split(',');
+      const exchangesList = selectedExchange?.exchange.split(', ');
       setExchanges(exchangesList);
     }
   };
