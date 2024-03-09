@@ -16,6 +16,16 @@ export const chartOptions = {
       },
     },
   },
+  scales: {
+    x: {
+      type: 'timeseries' as const,
+      time: {
+        displayFormats: {
+          day: 'yyyy-MM-dd',
+        },
+      },
+    },
+  },
 };
 
 export const DEFAULT_QUERY = 'aa';
@@ -36,6 +46,7 @@ export const METRICS = [
 export enum ChartType {
   bar = 'bar',
   line = 'line',
+  scatter = 'scatter',
 }
 
 export enum Theme {
