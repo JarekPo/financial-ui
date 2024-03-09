@@ -1,6 +1,7 @@
 import React, {MouseEvent} from 'react';
 
 import BarChartIcon from '@mui/icons-material/BarChart';
+import ScatterPlotIcon from '@mui/icons-material/ScatterPlot';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import {Typography} from '@mui/material';
 import Grid from '@mui/material/Grid';
@@ -30,6 +31,9 @@ export const ChartTypeSelector = () => {
           </ToggleButton>
           <ToggleButton value={ChartType.bar} onClick={handleChartTypeSelect} aria-label='bar chart'>
             <BarChartIcon />
+          </ToggleButton>
+          <ToggleButton value={ChartType.scatter} onClick={handleChartTypeSelect} aria-label='scatter chart'>
+            <ScatterPlotIcon />
           </ToggleButton>
         </ToggleButtonGroup>
       </Grid>

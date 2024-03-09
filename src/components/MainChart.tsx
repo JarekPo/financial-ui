@@ -1,6 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {Line} from 'react-chartjs-2';
-import {Bar} from 'react-chartjs-2';
+import {Bar, Line, Scatter} from 'react-chartjs-2';
 
 import LinearProgress from '@mui/material/LinearProgress';
 import {
@@ -112,6 +111,9 @@ const MainChart = () => {
       {isLoading && <LinearProgress />}
       {chartType === ChartType.line && <Line data={chartData} options={chartOptions} style={{maxHeight: '66vh'}} />}
       {chartType === ChartType.bar && <Bar data={chartData} options={chartOptions} style={{maxHeight: '66vh'}} />}
+      {chartType === ChartType.scatter && (
+        <Scatter data={chartData} options={chartOptions} style={{maxHeight: '66vh'}} />
+      )}
     </>
   );
 };
