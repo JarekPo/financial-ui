@@ -16,7 +16,7 @@ import {themeAtom} from '../state/store';
 import ThemeToggler from './ThemeToggler';
 
 const Navigation = () => {
-  const [value, setValue] = useState<number>(1);
+  const [selectedTab, setSelectedTab] = useState<string>('home');
   const [theme, setTheme] = useAtom(themeAtom);
 
   return (
@@ -28,16 +28,27 @@ const Navigation = () => {
               src={theme == Theme.light ? logo : logoDark}
               alt='logo'
               style={{width: '70px', marginRight: 10, padding: 5}}
+              onClick={() => setSelectedTab('home')}
             />
           </Link>
           <Link to='/'>
-            <Button startIcon={<HomeIcon />} size='large' sx={{padding: 2.5}}>
+            <Button
+              startIcon={<HomeIcon />}
+              size='large'
+              sx={selectedTab === 'home' ? {border: '1px solid #bdbdbd'} : {}}
+              onClick={() => setSelectedTab('home')}
+            >
               Home
             </Button>
           </Link>
-          <Link to='/search-stock'>
-            <Button startIcon={<SearchIcon />} size='large' sx={{padding: 2.5}}>
-              Serch Stock
+          <Link to='/search-stock' state={{isActive: true}}>
+            <Button
+              startIcon={<SearchIcon />}
+              size='large'
+              sx={selectedTab === 'search-stock' ? {border: '1px solid #bdbdbd'} : {}}
+              onClick={() => setSelectedTab('search-stock')}
+            >
+              Search Stock
             </Button>
           </Link>
         </Stack>
