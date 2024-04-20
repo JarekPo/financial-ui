@@ -7,6 +7,7 @@ import {
   BarElement,
   CategoryScale,
   Chart as ChartJS,
+  Filler,
   Legend,
   LinearScale,
   LineElement,
@@ -44,7 +45,8 @@ ChartJS.register(
   TimeScale,
   TimeSeriesScale,
   BarElement,
-  BarController
+  BarController,
+  Filler
 );
 
 const MainChart = () => {
@@ -95,21 +97,24 @@ const MainChart = () => {
     return {
       datasets: [
         {
-          tension: 0.3,
+          fill: chartType === ChartType.area ? true : false,
+          tension: chartType === ChartType.area ? 0 : 0.3,
           label: datasets.length ? `${selectedProduct.label} - ${selectedMetric}` : 'No data',
           data: datasets,
           borderColor: 'rgba(10, 131, 245, 0.8)',
-          backgroundColor: 'rgba(39, 131, 245, 0.8)',
+          backgroundColor: 'rgba(39, 131, 245, 0.5)',
         },
       ],
     };
-  }, [historicalData, datasets]);
+  }, [historicalData, datasets, chartType]);
 
   return (
     <>
       <ChartSettings />
       {isLoading && <LinearProgress />}
-      {chartType === ChartType.line && <Line data={chartData} options={chartOptions} style={{maxHeight: '66vh'}} />}
+      {(chartType === ChartType.line || chartType === ChartType.area) && (
+        <Line data={chartData} options={chartOptions} style={{maxHeight: '66vh'}} />
+      )}
       {chartType === ChartType.bar && <Bar data={chartData} options={chartOptions} style={{maxHeight: '66vh'}} />}
       {chartType === ChartType.scatter && (
         <Scatter data={chartData} options={chartOptions} style={{maxHeight: '66vh'}} />

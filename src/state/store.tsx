@@ -33,7 +33,7 @@ export const historicalDataAtom = atom({
     },
   ],
 });
-export const chartTypeAtom = atom('line');
+export const chartTypeAtom = atom('area');
 export const themeAtom = atom(localStorage.getItem('theme') === Theme.dark ? Theme.dark : Theme.light);
 export const exchangesAtom = atom(['']);
 export const stockSerachParamsAtom = atom({
