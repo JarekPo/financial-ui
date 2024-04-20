@@ -44,6 +44,7 @@ export const METRICS = [
 ];
 
 export enum ChartType {
+  area = 'area',
   bar = 'bar',
   line = 'line',
   scatter = 'scatter',
