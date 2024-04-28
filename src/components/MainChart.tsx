@@ -17,6 +17,7 @@ import {
   Title,
   Tooltip,
 } from 'chart.js';
+import gradient from 'chartjs-plugin-gradient';
 import {useAtom} from 'jotai';
 
 import {chartOptions, ChartType} from '../constants/constants';
@@ -46,7 +47,8 @@ ChartJS.register(
   TimeSeriesScale,
   BarElement,
   BarController,
-  Filler
+  Filler,
+  gradient
 );
 
 const MainChart = () => {
@@ -103,6 +105,15 @@ const MainChart = () => {
           data: datasets,
           borderColor: 'rgba(10, 131, 245, 0.8)',
           backgroundColor: 'rgba(39, 131, 245, 0.5)',
+          gradient: {
+            backgroundColor: {
+              axis: 'y',
+              colors: {
+                0: 'rgba(204, 228, 255, 0.5)',
+                100: 'rgba(39, 131, 245, 0.5)',
+              },
+            } as const,
+          },
         },
       ],
     };
