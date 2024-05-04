@@ -13,7 +13,7 @@ const ProductSummaryCard = () => {
   const [selectedProduct, setSelectedProduct] = useAtom(selectedProductAtom);
 
   return (
-    <Card sx={{maxWidth: 600, marginTop: 2}}>
+    <Card sx={{minWidth: 300, marginTop: 2, marginLeft: 1}}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant='h6' component='div'>

@@ -39,7 +39,7 @@ const DateRangePicker = () => {
             label='Time Range'
             variant='outlined'
             size='small'
-            sx={{width: 240}}
+            sx={{width: 300}}
           />
         }
       />
