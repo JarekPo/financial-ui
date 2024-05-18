@@ -15,9 +15,9 @@ const Home = () => {
     <>
       <Paper sx={{margin: 1, padding: 2}}>
         <Grid container spacing={2} direction='row' justifyContent='space-around' alignItems='center'>
-          <DateRangePicker />
           <ProductNameInput />
           <MetricsSelector />
+          <DateRangePicker />
           <ProductSummaryCard />
         </Grid>
 
