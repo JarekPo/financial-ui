@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useEffect} from 'react';
+import React, {SyntheticEvent, useEffect, useState} from 'react';
 
 import Autocomplete from '@mui/material/Autocomplete';
 import Grid from '@mui/material/Grid';
@@ -8,30 +8,40 @@ import {useAtom} from 'jotai';
 import {DEFAULT_QUERY} from '../constants/constants';
 import {getTickerCatalog} from '../services/FMservices';
 import {productOptionsAtom, selectedProductAtom} from '../state/store';
+import CustomSnackbar, {CustomSnackbarProps} from './CustomSnackbar';
 
 const ProductNameInput = () => {
   const [catalogProducts, setCatalogProducts] = useAtom(productOptionsAtom);
   const [selectedProduct, setSelectedProduct] = useAtom(selectedProductAtom);
+  const [fetchError, setFetchError] = useState<CustomSnackbarProps>({});
 
   useEffect(() => {
     fetchCatalogData(DEFAULT_QUERY);
   }, []);
 
   const fetchCatalogData = async (userInput: string) => {
-    const data = await getTickerCatalog(userInput);
-    const products = data[0].map(
-      (product: {name: string; symbol: string; currency: string; exchangeShortName: string}) => {
-        return {
-          label: `${product.name} (${product.symbol})`,
-          id: product.symbol,
-          currency: product.currency,
-          stockExchange: product.exchangeShortName,
-        };
+    try {
+      const data = await getTickerCatalog(userInput);
+      const products = data[0].map(
+        (product: {name: string; symbol: string; currency: string; exchangeShortName: string}) => {
+          return {
+            label: `${product.name} (${product.symbol})`,
+            id: product.symbol,
+            currency: product.currency,
+            stockExchange: product.exchangeShortName,
+          };
+        }
+      );
+      setCatalogProducts(products);
+      if (!selectedProduct.id) {
+        setSelectedProduct(products[0]);
       }
-    );
-    setCatalogProducts(products);
-    if (!selectedProduct.id) {
-      setSelectedProduct(products[0]);
+    } catch (error) {
+      setFetchError({
+        open: true,
+        severity: 'error',
+        message: 'Failed to fetch countries. Refresh page or try again later.',
+      });
     }
   };
 
@@ -74,6 +84,9 @@ const ProductNameInput = () => {
           )}
         />
       </Grid>
+      {fetchError.open && (
+        <CustomSnackbar open={fetchError.open} severity={fetchError.severity} message={fetchError.message} />
+      )}
     </>
   );
 };

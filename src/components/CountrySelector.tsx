@@ -8,18 +8,29 @@ import {useAtom} from 'jotai';
 import {getCountries} from '../services/FMservices';
 import {exchangesAtom, stockSerachParamsAtom} from '../state/store';
 import {CountriesData} from '../types/types';
+import CustomSnackbar, {CustomSnackbarProps} from './CustomSnackbar';
 
 const CountrySelector = () => {
   const [countries, setCountries] = useState<CountriesData[]>([]);
   const [country, setCountry] = useState<string | null>('');
   const [exchanges, setExchanges] = useAtom(exchangesAtom);
   const [stockSearchParams, setStockSearchParams] = useAtom(stockSerachParamsAtom);
+  const [fetchError, setFetchError] = useState<CustomSnackbarProps>({});
 
   useEffect(() => {
     const fetchCountries = async () => {
-      const data = await getCountries();
-      setCountries(data);
+      try {
+        const data = await getCountries();
+        setCountries(data);
+      } catch (error) {
+        setFetchError({
+          open: true,
+          severity: 'error',
+          message: 'Failed to fetch countries. Refresh page or try again later.',
+        });
+      }
     };
+
     fetchCountries();
   }, []);
 
@@ -51,6 +62,9 @@ const CountrySelector = () => {
           )}
         />
       </Grid>
+      {fetchError.open && (
+        <CustomSnackbar open={fetchError.open} severity={fetchError.severity} message={fetchError.message} />
+      )}
     </>
   );
 };

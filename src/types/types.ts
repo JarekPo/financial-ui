@@ -52,3 +52,14 @@ export interface CountriesData {
   country: string;
   exchange: string;
 }
+
+export interface StockSearchData {
+  country: string;
+  currency: string;
+  exchange: string;
+  id: number;
+  mic_code: string;
+  name: string;
+  symbol: string;
+  type: string;
+}

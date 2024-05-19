@@ -13,6 +13,7 @@ export const selectedProductAtom = atom({
   stockExchange: '',
 });
 export const selectedMetricAtom = atom('close');
+
 export const historicalDataAtom = atom({
   symbol: '',
   historical: [
@@ -33,6 +34,7 @@ export const historicalDataAtom = atom({
     },
   ],
 });
+
 export const chartTypeAtom = atom('area');
 export const themeAtom = atom(localStorage.getItem('theme') === Theme.dark ? Theme.dark : Theme.light);
 export const exchangesAtom = atom(['']);
@@ -42,4 +44,16 @@ export const stockSerachParamsAtom = atom({
   symbol: '',
   name: '',
 });
-export const stocksDataAtom = atom([]);
+
+export const stocksDataAtom = atom([
+  {
+    country: '',
+    currency: '',
+    exchange: '',
+    id: 0,
+    mic_code: '',
+    name: '',
+    symbol: '',
+    type: '',
+  },
+]);
