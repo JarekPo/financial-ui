@@ -1,5 +1,6 @@
 import format from 'date-fns/format';
 
+import {HistoricalData, StockSearchData} from '../types/types';
 import {financialBackendInstance} from './instances';
 
 export const getTickerCatalog = async (query: string) => {
@@ -7,14 +8,21 @@ export const getTickerCatalog = async (query: string) => {
     const {data, status} = await financialBackendInstance.get('search-ticker', {
       params: {query: query},
     });
+    if (!data) {
+      throw new Error('No data returned.');
+    }
     return [data];
   } catch (error) {
     console.error('Could not fetch data from the Ticker catalog.', error);
-    return [];
+    throw error;
   }
 };
 
-export const getHistoricalPrices = async (selectedProduct: string, startDate: Date, endDate: Date) => {
+export const getHistoricalPrices = async (
+  selectedProduct: string,
+  startDate: Date,
+  endDate: Date
+): Promise<HistoricalData> => {
   try {
     const {data, status} = await financialBackendInstance.get(`historical-price`, {
       params: {
@@ -23,20 +31,26 @@ export const getHistoricalPrices = async (selectedProduct: string, startDate: Da
         date_end: format(endDate, 'yyyy-MM-dd'),
       },
     });
+    if (!data) {
+      throw new Error('No data returned.');
+    }
     return data;
   } catch (error) {
     console.error('Could not fetch the historical prices.', error);
-    return [];
+    throw error;
   }
 };
 
 export const getCountries = async () => {
   try {
     const {data, status} = await financialBackendInstance.get('country-data');
+    if (!data) {
+      throw new Error('No data returned.');
+    }
     return data;
   } catch (error) {
-    console.error('Could not fetch the caontries.', error);
-    return [];
+    console.error('Could not fetch the countries.', error);
+    throw error;
   }
 };
 
@@ -45,7 +59,7 @@ export const getStockSearchResults = async (
   exchange: string | null,
   symbol: string | null,
   name: string | null
-) => {
+): Promise<StockSearchData[]> => {
   try {
     const {data, status} = await financialBackendInstance.get('stock-search', {
       params: {
@@ -55,9 +69,12 @@ export const getStockSearchResults = async (
         name: name,
       },
     });
+    if (!data) {
+      throw new Error('No data returned.');
+    }
     return data;
   } catch (error) {
     console.error('Could not fetch the search results.', error);
-    return [];
+    throw error;
   }
 };

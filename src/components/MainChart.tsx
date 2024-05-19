@@ -32,6 +32,7 @@ import {
 } from '../state/store';
 import {DatasetMetrics, ProductMetric} from '../types/types';
 import ChartSettings from './ChartSettings';
+import CustomSnackbar, {CustomSnackbarProps} from './CustomSnackbar';
 
 import 'chartjs-adapter-date-fns';
 
@@ -60,13 +61,22 @@ const MainChart = () => {
   const [selectedMetric, setSelectedMetric] = useAtom(selectedMetricAtom);
   const [chartType, setChartType] = useAtom(chartTypeAtom);
   const [isLoading, setIsLoading] = useState(false);
+  const [fetchError, setFetchError] = useState<CustomSnackbarProps>({});
 
   useEffect(() => {
     const fetchHistoricalData = async () => {
       if (endDate && selectedProduct.id) {
         setIsLoading(true);
-        const data = await getHistoricalPrices(selectedProduct.id, startDate, endDate);
-        setHistoricalData(data);
+        try {
+          const data = await getHistoricalPrices(selectedProduct.id, startDate, endDate);
+          setHistoricalData(data);
+        } catch (error) {
+          setFetchError({
+            open: true,
+            severity: 'error',
+            message: 'Failed to fetch historical data. Refresh page or try again later.',
+          });
+        }
         setIsLoading(false);
       }
     };
@@ -129,6 +139,9 @@ const MainChart = () => {
       {chartType === ChartType.bar && <Bar data={chartData} options={chartOptions} style={{maxHeight: '66vh'}} />}
       {chartType === ChartType.scatter && (
         <Scatter data={chartData} options={chartOptions} style={{maxHeight: '66vh'}} />
+      )}
+      {fetchError.open && (
+        <CustomSnackbar open={fetchError.open} severity={fetchError.severity} message={fetchError.message} />
       )}
     </>
   );

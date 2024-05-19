@@ -25,7 +25,7 @@ export const ChartTypeSelector = () => {
       <Grid item>
         <Typography variant='body1'>Chart Type</Typography>
       </Grid>
-      <Grid item>
+      <Grid item sx={{paddingRight: 3}}>
         <ToggleButtonGroup value={chartType} exclusive aria-label='chart type buttons'>
           <ToggleButton value={ChartType.area} onClick={handleChartTypeSelect} aria-label='area chart'>
             <LandscapeTwoToneIcon />

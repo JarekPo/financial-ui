@@ -8,21 +8,32 @@ import {useAtom} from 'jotai';
 
 import {getStockSearchResults} from '../services/FMservices';
 import {stocksDataAtom, stockSerachParamsAtom} from '../state/store';
+import CustomSnackbar, {CustomSnackbarProps} from './CustomSnackbar';
 
 const SearchButton = () => {
   const [stockSearchParams, setStockSearchParams] = useAtom(stockSerachParamsAtom);
   const [stocksData, setStocksData] = useAtom(stocksDataAtom);
   const [isLoading, setIsLoading] = useState(false);
+  const [fetchError, setFetchError] = useState<CustomSnackbarProps>({});
 
   const handleSearchClick = async () => {
     setIsLoading(true);
-    const response = await getStockSearchResults(
-      stockSearchParams.country,
-      stockSearchParams.exchange,
-      stockSearchParams.symbol,
-      stockSearchParams.name
-    );
-    setStocksData(response);
+    try {
+      const response = await getStockSearchResults(
+        stockSearchParams.country,
+        stockSearchParams.exchange,
+        stockSearchParams.symbol,
+        stockSearchParams.name
+      );
+      setStocksData(response);
+    } catch (error) {
+      setFetchError({
+        open: true,
+        severity: 'error',
+        message: 'Failed to fetch results. Refresh page or try again later.',
+      });
+    }
+
     setIsLoading(false);
   };
   return (
@@ -37,6 +48,9 @@ const SearchButton = () => {
           Search
         </Button>
       </Grid>
+      {fetchError.open && (
+        <CustomSnackbar open={fetchError.open} severity={fetchError.severity} message={fetchError.message} />
+      )}
     </>
   );
 };
