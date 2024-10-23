@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import Paper from '@mui/material/Paper';
 import {ThemeProvider} from '@mui/material/styles';
 import {useAtom} from 'jotai';
 
+import {initGA, logPageView} from './analytics/ga4';
 import Navigation from './components/Navigation';
 import {Theme} from './constants/constants';
 import Home from './pages/Home';
@@ -16,6 +17,11 @@ import './App.css';
 
 const App = () => {
   const [theme, setTheme] = useAtom(themeAtom);
+
+  useEffect(() => {
+    initGA();
+    logPageView();
+  }, []);
 
   return (
     <>
