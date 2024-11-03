@@ -64,12 +64,20 @@ const MainChart = () => {
   const [fetchError, setFetchError] = useState<CustomSnackbarProps>({});
 
   useEffect(() => {
+    setFetchError({});
     const fetchHistoricalData = async () => {
       if (endDate && selectedProduct.id) {
         setIsLoading(true);
         try {
           const data = await getHistoricalPrices(selectedProduct.id, startDate, endDate);
           setHistoricalData(data);
+          if (Object.keys(data).length === 0) {
+            setFetchError({
+              open: true,
+              severity: 'info',
+              message: 'No data available for the selected instrument.',
+            });
+          }
         } catch (error) {
           setFetchError({
             open: true,
