@@ -7,19 +7,21 @@ import {useAtom} from 'jotai';
 
 import {DEFAULT_QUERY} from '../constants/constants';
 import {getTickerCatalog} from '../services/FMservices';
-import {productOptionsAtom, selectedProductAtom} from '../state/store';
+import {isPageLoadingAtom, productOptionsAtom, selectedProductAtom} from '../state/store';
 import CustomSnackbar, {CustomSnackbarProps} from './CustomSnackbar';
 
 const ProductNameInput = () => {
   const [catalogProducts, setCatalogProducts] = useAtom(productOptionsAtom);
   const [selectedProduct, setSelectedProduct] = useAtom(selectedProductAtom);
   const [fetchError, setFetchError] = useState<CustomSnackbarProps>({});
+  const [isLoading, setIsLoading] = useAtom(isPageLoadingAtom);
 
   useEffect(() => {
     fetchCatalogData(DEFAULT_QUERY);
   }, []);
 
   const fetchCatalogData = async (userInput: string) => {
+    setIsLoading(true);
     try {
       const data = await getTickerCatalog(userInput);
       const products = data[0].map(
@@ -43,6 +45,7 @@ const ProductNameInput = () => {
         message: 'Failed to fetch countries. Refresh page or try again later.',
       });
     }
+    setIsLoading(false);
   };
 
   const handleProductChange = (
