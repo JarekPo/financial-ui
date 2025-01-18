@@ -7,14 +7,14 @@ import {useAtom} from 'jotai';
 
 import {DEFAULT_QUERY} from '../constants/constants';
 import {getTickerCatalog} from '../services/FMservices';
-import {isPageLoadingAtom, productOptionsAtom, selectedProductAtom} from '../state/store';
+import {isLoadingAtom, productOptionsAtom, selectedProductAtom} from '../state/store';
 import CustomSnackbar, {CustomSnackbarProps} from './CustomSnackbar';
 
 const ProductNameInput = () => {
   const [catalogProducts, setCatalogProducts] = useAtom(productOptionsAtom);
   const [selectedProduct, setSelectedProduct] = useAtom(selectedProductAtom);
   const [fetchError, setFetchError] = useState<CustomSnackbarProps>({});
-  const [isLoading, setIsLoading] = useAtom(isPageLoadingAtom);
+  const [isLoading, setIsLoading] = useAtom(isLoadingAtom);
 
   useEffect(() => {
     fetchCatalogData(DEFAULT_QUERY);
