@@ -57,3 +57,5 @@ export const stocksDataAtom = atom([
     type: '',
   },
 ]);
+
+export const isLoadingAtom = atom(false);

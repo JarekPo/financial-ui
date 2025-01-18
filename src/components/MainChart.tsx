@@ -26,6 +26,7 @@ import {
   chartTypeAtom,
   endDateAtom,
   historicalDataAtom,
+  isLoadingAtom,
   selectedMetricAtom,
   selectedProductAtom,
   startDateAtom,
@@ -60,7 +61,7 @@ const MainChart = () => {
   const [selectedProduct, setSelectedProduct] = useAtom(selectedProductAtom);
   const [selectedMetric, setSelectedMetric] = useAtom(selectedMetricAtom);
   const [chartType, setChartType] = useAtom(chartTypeAtom);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useAtom(isLoadingAtom);
   const [fetchError, setFetchError] = useState<CustomSnackbarProps>({});
 
   useEffect(() => {
