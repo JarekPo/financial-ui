@@ -6,6 +6,8 @@ import {useAtom} from 'jotai';
 
 import {stocksTablecolumns} from '../constants/constants';
 import {stocksDataAtom} from '../state/store';
+import {isTableEmpty} from '../utils/stockTableUtils';
+import CustomOverlay from './CustomOverlay';
 
 const StocksTable = () => {
   const [stocksData, setStocksData] = useAtom(stocksDataAtom);
@@ -13,7 +15,7 @@ const StocksTable = () => {
     <Paper sx={{width: '100%', height: '100%'}}>
       <DataGrid
         style={{height: '80vh'}}
-        rows={stocksData}
+        rows={isTableEmpty(stocksData) ? [] : stocksData}
         columns={stocksTablecolumns}
         initialState={{
           pagination: {
@@ -22,6 +24,11 @@ const StocksTable = () => {
         }}
         pageSizeOptions={[12, 24, 50, 100]}
         disableRowSelectionOnClick
+        slots={{
+          noRowsOverlay: CustomOverlay,
+        }}
+        hideFooterPagination={isTableEmpty(stocksData)}
+        hideFooter={isTableEmpty(stocksData)}
       />
     </Paper>
   );
