@@ -11,12 +11,23 @@ const Disclaimer = () => {
       <Paper sx={{margin: 1, padding: 1, textAlign: 'center'}}>
         <Typography variant='caption'>
           <InfoOutlinedIcon fontSize='inherit' sx={{marginRight: 0.5}} />
-          This instance of the application is for demonstration purposes. Created by{' '}
-          <Link href='https://github.com/JarekPo' underline='hover' target='_blank'>
-            JarekPo
+          This application is for demonstration purposes only. Created by{' '}
+          <Link
+            href='https://www.linkedin.com/in/jarek-polowy/'
+            underline='hover'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            Jarek Polowy
           </Link>
           . Data provided by{' '}
-          <Link href='https://financialmodelingprep.com/developer/docs/' underline='none' target='_blank'>
+          <Link
+            color='textPrimary'
+            href='https://financialmodelingprep.com/developer/docs/'
+            underline='hover'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             Financial Modeling Prep
           </Link>
           .
