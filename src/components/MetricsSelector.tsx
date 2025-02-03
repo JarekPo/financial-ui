@@ -17,7 +17,7 @@ const MetricsSelector = () => {
   };
   return (
     <>
-      <Grid item>
+      <Grid item xs={10} sm={5} md={4} lg={3}>
         <FormControl>
           <InputLabel id='metrics-select-label'>Metrics</InputLabel>
           <Select

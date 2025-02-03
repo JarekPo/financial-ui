@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <>
       <Paper sx={{margin: 1, padding: 2}}>
-        <Grid container spacing={2} direction='row' justifyContent='space-around' alignItems='center'>
+        <Grid container spacing={1} direction='row' justifyContent='space-around' alignItems='center'>
           <ProductNameInput />
           <MetricsSelector />
           <DateRangePicker />

@@ -22,7 +22,7 @@ const DateRangePicker = () => {
     setEndDate(end);
   };
   return (
-    <Grid item>
+    <Grid item xs={10} sm={6} md={4} lg={3}>
       <DatePicker
         selected={startDate}
         onChange={onChange}
@@ -39,7 +39,7 @@ const DateRangePicker = () => {
             label='Time Range'
             variant='outlined'
             size='small'
-            sx={{width: 300}}
+            sx={{width: 276}}
           />
         }
       />
