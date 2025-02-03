@@ -21,10 +21,10 @@ export const ThemeToggler = () => {
     <>
       <ToggleButtonGroup size='small' value={theme} exclusive aria-label='theme change buttons'>
         <ToggleButton value={Theme.light} onClick={handleThemeSelect} aria-label='light theme'>
-          <LightModeIcon />
+          <LightModeIcon fontSize='small' />
         </ToggleButton>
         <ToggleButton value={Theme.dark} onClick={handleThemeSelect} aria-label='dark theme'>
-          <DarkModeIcon />
+          <DarkModeIcon fontSize='small' />
         </ToggleButton>
       </ToggleButtonGroup>
     </>
