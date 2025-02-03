@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
+import {useTheme} from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import {useAtom} from 'jotai';
 
 import logo from '../assets/logo.png';
@@ -18,6 +20,8 @@ import ThemeToggler from './ThemeToggler';
 const Navigation = () => {
   const [selectedTab, setSelectedTab] = useState<string>('home');
   const [theme, setTheme] = useAtom(themeAtom);
+  const pageTheme = useTheme();
+  const isSmallScreen = useMediaQuery(pageTheme.breakpoints.down('sm'));
 
   return (
     <Paper sx={{margin: 1}}>
@@ -34,7 +38,7 @@ const Navigation = () => {
           <Link to='/'>
             <Button
               startIcon={<HomeIcon />}
-              size='large'
+              size={isSmallScreen ? 'small' : 'large'}
               sx={selectedTab === 'home' ? {border: '1px solid #bdbdbd'} : {}}
               onClick={() => setSelectedTab('home')}
             >
@@ -44,7 +48,7 @@ const Navigation = () => {
           <Link to='/search-stock' state={{isActive: true}}>
             <Button
               startIcon={<SearchIcon />}
-              size='large'
+              size={isSmallScreen ? 'small' : 'large'}
               sx={selectedTab === 'search-stock' ? {border: '1px solid #bdbdbd'} : {}}
               onClick={() => setSelectedTab('search-stock')}
             >
