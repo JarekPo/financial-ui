@@ -56,7 +56,7 @@ export enum Theme {
 }
 
 export const stocksTablecolumns: GridColDef[] = [
-  {field: 'name', headerName: 'Name', width: 600},
+  {field: 'name', headerName: 'Name', width: 500},
   {field: 'symbol', headerName: 'Symbol', width: 130},
   {field: 'type', headerName: 'Type', width: 130},
   {field: 'currency', headerName: 'Currency', width: 130},
