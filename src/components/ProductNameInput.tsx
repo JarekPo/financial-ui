@@ -69,12 +69,12 @@ const ProductNameInput = () => {
 
   return (
     <>
-      <Grid item>
+      <Grid item xs={10} sm={6} md={4} lg={3}>
         <Autocomplete
           disablePortal
           id='product-autocomplete'
           options={catalogProducts}
-          sx={{width: 300}}
+          sx={{width: 276}}
           onChange={handleProductChange}
           renderInput={(params) => (
             <TextField
